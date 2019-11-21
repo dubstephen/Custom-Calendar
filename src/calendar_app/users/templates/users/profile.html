@@ -1,0 +1,98 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load staticfiles %}
+<div id="profile_page" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({{ context.calendar_image }})no-repeat center center; background-size: cover;">
+    <h3 id="username">{{user.username}}'s Calendar</h3>
+    <h5 id="author">Image By: <a href="{{ context.author_link }}">{{ context.image_author }}</a></h5>
+    {% if user.is_authenticated %}
+    <div style="background: url({{ context.calendar_image }}) no-repeat center center; background-size: cover;" class="calendar__picture">
+    </div>
+    {% endif %}
+    {% if message %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissable" role="alert">
+                <button class="close" data-dismiss="alert">
+                    <small><sup>x</sup></small>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div id="event_wrapper">
+        {% for event in context.event_items %}
+        {% if user.is_authenticated and user == event.author %}
+            <div class="event_whole">
+                <div class="event event_name event_{{ event.id }}">Event Name: {{ event.event_name }}</div>
+                <ul class="event_details">
+                    <li class="event"> Start Date: {{ event.date }}</li>
+                    <li class="event">Start Time: {{ event.start_time }}</li>
+                    <li class="event">End Time: {{ event.end_time }}</li>
+                    <li class="event">Description: {{ event.description }}</li>
+                    <li>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="delete event"><a href="{% url 'event_delete' event.id %}">Delete Event</a></div>
+                    </form>
+                    </li>
+                </ul>
+            </div>
+
+            <script type="text/javascript">
+                $( document ).ready(function() {
+                    var eventName = document.getElementsByClassName('event_{{ event.id }}');
+                    var eventDetails = document.getElementsByClassName('event_details');
+
+                    $(eventName).click(function() {
+                        $(this).next().stop(true, false, true).slideToggle('fast');
+                    });
+                });
+            </script>
+
+        {% endif %}
+        {% endfor %}
+        <div id="close_events">Close Menu</div>
+
+    </div>
+        <form id="event_form" method="POST">
+            <ol>
+                {% csrf_token %}
+                <li>Event Name: {{ context.event_form.event_name }}</li>
+                <li>Date: {{ context.event_form.date }}</li>
+                <li>Start Time: {{ context.event_form.start_time }}</li>
+                <li>End time: {{ context.event_form.end_time }}</li>
+                <li>Description: {{ context.event_form.description }}</li>
+            </ol>
+            <button id="create_event_button" class="btn btn-outline-info" type="submit">Create Event!</button>
+            <div id="close_event_form">Close Menu</div>
+        </form>
+    <div class="calendar">
+        <button id="add_event">Add Event</button>
+        <button id="view_events">View Events</button>
+        <div class="calendar__date">{{ context.current_month_string }}</div>
+        <div class="calendar__year">{{ context.current_year }}</div>
+        <div id="previous_month"><a href="{% url 'profile_previous_month_home' month_num=context.current_month_number year_num=context.current_year %}"><</a></div>
+        {% for day in context.days_in_week %}
+            <div class="days_of_week">{{ day }}</div>
+        {% endfor %}
+        <div id="next_month"><a href="{% url 'profile_next_month_home' month_num=context.current_month_number year_num=context.current_year %}">></a></div>
+
+        <div class="spacer">
+            {% if context.spacer <= 6 %}
+                {% for day in context.first_weekday_of_month %}
+                    <div class='calendar__number'> </div>
+                {% endfor %}
+            {% endif %}
+
+            {% for day in context.days_in_month %}
+                {% if day == context.current_day and context.current_month_number == context.actual_current_month %}
+                    <div style="color: #53afe1b0; background-color: #3333339c;" class="calendar__number">{{ day }}</div>
+                {% else %}
+                    <div class="calendar__number">{{ day }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
