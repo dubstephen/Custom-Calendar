@@ -17,16 +17,16 @@ ___
 ### 2) Fill out the registration form and click 'Sign Up'. Note: You do not need to use an actual email address. This is only for password recovery which I have not set up yet.
 ![](Readme_Images/Sign_up.png)
 ---
-### 3) Enter your credentials amd click 'Log In' button.
+### 3) Enter your credentials and click 'Log In' button.
 ![](Readme_Images/Log_in.png)
 ---
-### 4) Now that you're logged in you can use the search bar to type in what theme you want. This uses Unsplash's API and will return 12 images that have tags that match the provided theme.
+### 4) Now that you're logged in, you can use the search bar to type in what theme you want. This uses Unsplash's API and will return 12 images that have tags that match the provided theme.
 ![](Readme_Images/Search_Theme.png)
 ### The images will automatically be set to each month.
 ![](Readme_Images/Generated.png)
 ### 5) You can also set upcoming events by clicking 'Add Event' to open a menu containing a form.
 ![](Readme_Images/add_event.png)
-### 6) Fill out the form and give the event a name, start date, start/end time, and a description. Then click 'Create Event'.
+### 6) Give the event a name, start date, start/end time, and a description. Then click 'Create Event'.
 ![](Readme_Images/create_event.png)
 ### 7) Now that you have your event, you can view it at any time by clicking 'View Events' and then clicking on the 'Event Name' to expand the event details.
 ![](Readme_Images/view_events.png)
