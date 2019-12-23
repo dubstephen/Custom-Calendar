@@ -163,6 +163,11 @@ def profile(request, month, day, year):
 # and visa versa.
 @login_required
 def previous_month(request, month_num, year_num):
+    if month_num.isdigit() and year_num.isdigit():
+        if int(month_num) > 12 or int(year_num) > 9999 or int(year_num) < 1000:
+            return redirect('profile_home')
+    else:
+        return redirect('profile_home')
     if int(month_num) < 0:
         month_num = abs(int(month_num)) % 12
     if int(month_num) == 1 or int(month_num) == 0:
@@ -175,6 +180,11 @@ def previous_month(request, month_num, year_num):
 
 @login_required
 def next_month(request, month_num, year_num):
+    if month_num.isdigit() and year_num.isdigit():
+        if int(month_num) > 12 or int(year_num) > 9999 or int(year_num) < 1000:
+            return redirect('profile_home')
+    else:
+        return redirect('profile_home')
     if int(month_num) >= 12:
         month_num = abs(int(month_num)) % 12
         context = profile(request, int(month_num) + 1, dt.date.today().day, abs(int(year_num)) + 1)
