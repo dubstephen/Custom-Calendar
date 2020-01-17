@@ -8,6 +8,7 @@ ___
 ### 3) While in the terminal, make sure you are in the same directory as manage.py. Run 'python manage.py createsuperuser'.
 ### 4) Follow the steps to create your admin profile.
 ### 5) Run the command 'python manage.py runserver' and open the link to your local host.
+### *****Note: You will need your own secret key and API key*****
 ___
 # How to use
 ### 1) If you already have a profile or just want to use the the admin profile, you can skip steps one and two.
