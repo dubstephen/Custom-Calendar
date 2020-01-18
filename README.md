@@ -1,6 +1,6 @@
 # Custom-Calendar
 
-### Web application for generating calenders that fit any theme you want.
+### Web application for generating calendars that fit any theme you want.
 ___
 # Set-up
 ### 1) Clone the repo
